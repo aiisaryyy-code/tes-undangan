@@ -1,0 +1,666 @@
+/* =======================================
+   HAFIZ & NAIMAH WEDDING
+   EMERALD BLUE GOLD LUXURY
+======================================= */
+
+:root {
+  --emerald: #0B5D5B;
+  --emerald2: #0f7774;
+  --gold: #d4af37;
+  --gold2: #f5e6a7;
+  --white: #ffffff;
+  --cream: #faf7f1;
+  --shadow: 0 10px 35px rgba(0,0,0,.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: url("background.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: var(--emerald);
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* =======================================
+   SISTEM PENGUNCI SEBELUM BUKA UNDANGAN
+======================================= */
+body.lock-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.main-content.content-hidden {
+  display: none;
+}
+
+.main-content.content-show {
+  display: block;
+  animation: fadeInContent 1s ease-in-out forwards;
+}
+
+@keyframes fadeInContent {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================
+   FLORAL DECORATION & ANIMATION (GUGUR BUNGA ASLI)
+======================================= */
+.floral_top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.floral_bottom {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* KOREKSI: Mengatur properti dasar gambar kelopak dengan nama animasi yang sinkron */
+.petals img {
+  position: fixed;
+  top: -60px; /* Di luar viewport atas sedikit agar tidak kaget saat muncul */
+  pointer-events: none;
+  z-index: 4;
+  animation-name: fallEffect;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+/* Variasi acak posisi, ukuran, dan durasi jatuh agar terlihat natural */
+.petals img:nth-child(1) { left: 10%; width: 25px; animation-duration: 10s; animation-delay: 0s; }
+.petals img:nth-child(2) { left: 30%; width: 35px; animation-duration: 14s; animation-delay: 2s; }
+.petals img:nth-child(3) { left: 50%; width: 22px; animation-duration: 11s; animation-delay: 4s; }
+.petals img:nth-child(4) { left: 70%; width: 38px; animation-duration: 15s; animation-delay: 1.5s; }
+.petals img:nth-child(5) { left: 90%; width: 28px; animation-duration: 13s; animation-delay: 3s; }
+
+/* KOREKSI SINKRONISASI: Menggunakan nama fallEffect agar dibaca oleh pemanggil di atas */
+@keyframes fallEffect {
+  0% { 
+    transform: translateY(0) translateX(0) rotate(0deg); 
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% { 
+    transform: translateY(115vh) translateX(100px) rotate(360deg); 
+    opacity: 0;
+  }
+}
+
+/* =======================================
+   COMPONENTS: NAVBAR & HERO COVER
+======================================= */
+.navbar {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(11, 93, 91, 0.7);
+  backdrop-filter: blur(15px);
+  padding: 12px 25px;
+  border-radius: 40px;
+  
+  /* Sembunyikan mutlak di awal halaman cover */
+  display: none !important; 
+  opacity: 0 !important;
+  
+  gap: 15px;
+  z-index: 999;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: var(--shadow);
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Kelas kontrol pemicu via Javascript setelah tombol dibuka */
+.navbar.show-nav {
+  display: flex !important;
+  opacity: 1 !important;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  transition: .3s;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.navbar a:hover {
+  background: var(--gold);
+  color: var(--emerald);
+}
+
+.cover {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.glass {
+  max-width: 550px;
+  width: 100%;
+  padding: 50px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, .12);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, .2);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.kepada {
+  letter-spacing: 3px;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 15px;
+}
+
+.small {
+  font-size: 12px;
+  opacity: .8;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+
+#guest {
+  font-size: 30px;
+  font-family: 'Cormorant Garamond', serif;
+  color: white;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 80px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-top: 20px;
+  background: linear-gradient(90deg, #b8860b, #fff4b0, #d4af37, #fff4b0, #b8860b);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 6s infinite;
+
+  word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+h1 span {
+  font-size: 60px;
+}
+
+@keyframes shine {
+  0% { background-position: 0%; }
+  100% { background-position: 300%; }
+}
+
+.date {
+  font-size: 18px;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  color: var(--gold2);
+}
+
+button, .gift-card button {
+  margin-top: 35px;
+  padding: 15px 35px;
+  border: none;
+  border-radius: 40px;
+  background: linear-gradient(45deg, var(--gold), var(--gold2));
+  color: #0B5D5B;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .4s;
+  box-shadow: 0 5px 20px rgba(212, 175, 55, .4);
+}
+
+button:hover, .gift-card button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, .6);
+}
+
+/* Floating Music Button Layout & Animation */
+#musicBtn {
+  position: fixed;
+  bottom: 90px;
+  right: 25px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}
+
+.rotating {
+  animation: spinDisc 3s linear infinite;
+}
+
+@keyframes spinDisc {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* =======================================
+   SECTIONS LAYOUT
+======================================= */
+section {
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 45px;
+  background: rgba(255, 255, 255, .08);
+  backdrop-filter: blur(12px);
+  border-radius: 25px;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+section h2 {
+  font-size: 36px;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--gold2);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+section h3 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+section p {
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* =======================================
+   COUPLE BOX & CARDS
+======================================= */
+.couple-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background: rgba(255, 255, 255, .06);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, .15);
+  box-shadow: 0 8px 30px rgba(0,0,0,.2);
+  border-radius: 25px;
+  padding: 35px;
+  transition: .4s;
+  text-align: center;
+  flex: 1;
+  min-width: 280px;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid var(--gold);
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+  margin: 0 auto 20px auto;
+  display: block;
+}
+
+.card h2 { 
+  font-size: 22px; 
+  color: var(--white);
+  font-family: 'Cormorant Garamond', serif;
+  margin-bottom: 10px;
+}
+.card b { display: block; margin-top: 5px; color: var(--gold2); font-size: 14px; }
+
+.love {
+  font-size: 70px;
+  color: var(--gold);
+  font-family: 'Great Vibes', cursive;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.instagram {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 20px;
+  background: linear-gradient(45deg, var(--emerald), var(--gold));
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 13px;
+  transition: .3s;
+  box-shadow: 0 5px 15px rgba(0,0,0,.2);
+}
+
+.instagram:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,.3);
+}
+
+/* Timeline / Love Story */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.item {
+  background: rgba(255, 255, 255, .05);
+  padding: 25px;
+  border-left: 5px solid var(--gold);
+  border-radius: 0 15px 15px 0;
+  transition: .4s;
+  text-align: left;
+}
+
+.item h3 { text-align: left; color: var(--gold2); font-size: 18px; margin-bottom: 5px;}
+.item p { text-align: left; font-size: 14px; }
+.item:hover { transform: translateY(-4px); background: rgba(255, 255, 255, .08); }
+
+/* Event Cards & Gift */
+.event-card, .gift-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 20px;
+  text-align: center;
+}
+.event-card h3 { color: var(--gold2); }
+.gift-card h2 { font-size: 32px; letter-spacing: 2px; margin: 15px 0; color: #fff; }
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--gold2);
+}
+
+.maps {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 15px 30px;
+  background: var(--gold);
+  color: #0B5D5B;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: .3s;
+}
+.maps:hover { transform: translateY(-3px); opacity: 0.9; }
+
+/* =======================================
+   FORM RSVP STYLE
+======================================= */
+.rsvp form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.rsvp input, .rsvp textarea, .rsvp select {
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  font-size: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.rsvp select option {
+  background: var(--emerald);
+  color: #fff;
+}
+
+.rsvp input::placeholder, .rsvp textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.rsvp button { margin-top: 5px; width: 100%; }
+
+/* =======================================
+   BUKU TAMU / DAFTAR UCAPAN TERPISAH
+======================================= */
+.guestbook {
+  margin-top: 40px;
+}
+
+.comments-section {
+  text-align: left;
+}
+
+#commentsContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#commentsContainer::-webkit-scrollbar {
+  width: 5px;
+}
+#commentsContainer::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 10px;
+}
+
+.comment-card {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 4px solid var(--gold);
+  padding: 15px 20px;
+  border-radius: 0 15px 15px 0;
+  margin-bottom: 15px;
+  animation: fadeInComment 0.5s ease-in-out;
+}
+
+@keyframes fadeInComment {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.comment-name {
+  font-weight: 600;
+  color: var(--gold2);
+  font-size: 15px;
+}
+
+.comment-status {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.status-hadir {
+  background: rgba(15, 119, 116, 0.5);
+  color: #a3f7f5;
+  border: 1px solid var(--emerald2);
+}
+
+.status-tidak {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ddd;
+}
+
+.comment-text {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: left;
+}
+
+.loading-comments {
+  text-align: center;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* Closing & Footer */
+.closing h3 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 55px;
+  color: var(--gold);
+  margin-top: 20px;
+  text-align: center;
+}
+
+footer {
+  padding: 40px;
+  text-align: center;
+  font-size: 15px;
+  background: #083f3d;
+  margin-top: 50px;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* =======================================
+   RESPONSIVE DESIGN (MOBILE)
+======================================= */
+@media (max-width: 768px) {
+    /* Mencegah elemen keluar dari layar */
+    body {
+        overflow-x: hidden;
+        width: 100vw;
+    }
+
+    /* Mengurangi ukuran elemen dekorasi agar tidak menutupi konten */
+    .floral_top, .floral_bottom { 
+        width: 100px; 
+        opacity: 0.7; /* Sedikit transparan agar tidak mengganggu bacaan */
+    }
+
+    /* Judul Utama */
+    h1 { font-size: 45px; }
+    h1 span { font-size: 35px; }
+    
+    /* Layout Section agar benar-benar memanjang ke bawah */
+    section { 
+        margin: 10px 5px; 
+        padding: 20px; 
+        border-radius: 15px;
+    }
+
+    /* Memaksa elemen berdampingan menjadi menumpuk */
+    .couple-box, .row { 
+        flex-direction: column !important; 
+        display: flex !important;
+        gap: 20px;
+    }
+
+    /* Card Profil */
+    .card { 
+        width: 100%; 
+        min-width: unset; 
+        padding: 20px;
+    }
+
+    /* Navbar agar tidak terlalu padat */
+    .navbar { 
+        width: 95%; 
+        padding: 10px; 
+        gap: 5px;
+    }
+    .navbar a { 
+        font-size: 10px; 
+        padding: 5px 8px; 
+    }
+
+    /* Countdown timer agar muat di layar kecil */
+    #countdown {
+        gap: 10px;
+        font-size: 16px;
+    }
+    
+    /* Pastikan gambar tidak pecah */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
+/* Pengaturan dasar untuk layar kecil (HP) */
+@media screen and (max-width: 768px) {
+    body {
+        width: 100%;
+        overflow-x: hidden; /* Mencegah scrolling horizontal */
+    }
+
+    /* Ubah elemen yang tadinya berdampingan (misal: flex/grid) menjadi memanjang ke bawah */
+    .container, .row {
+        flex-direction: column !important;
+        display: flex;
+    }
+
+    /* Pastikan gambar tidak keluar dari layar */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+}
